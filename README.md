@@ -2,6 +2,8 @@
 
 A tip of the day progressive web app
 
+[![Build Status](https://travis-ci.org/themacclesoft/tipadvisor.svg?branch=master)](https://travis-ci.org/themacclesoft/tipadvisor)
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
