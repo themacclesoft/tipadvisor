@@ -2,13 +2,38 @@
 
 <html>
   <head>
-    <title>tipadvisor</title>
+    <title>TipAdvisor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/src/tipadvisor-app/tipadvisor-app.html">
+		<link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+		<link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+		<style>
+			html, body {
+				padding: 0;
+				margin: 0;
+				font-family: 'Roboto', 'Noto', sans-serif;
+			}
+			body {
+				transition: opacity ease-in 0.2s;
+			}
+			body[unresolved] {
+				opacity: 0;
+				display: block;
+				overflow: hidden;
+				position: relative;
+			}
+			paper-card {
+				width: 100%;
+			}
+		</style>
   </head>
-  <body>
-    <tipadvisor-app></tipadvisor-app>
+  <body class="fullbleed layout vertical">
+		<paper-header-panel class="flex">
+			<paper-toolbar><div>TipAdvisor</div></paper-toolbar>
+  </paper-header-panel>
+	<tipadvisor-app></tipadvisor-app>
+
   </body>
 </html>
