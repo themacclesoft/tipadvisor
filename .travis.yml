@@ -8,7 +8,7 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
-script: "polymer test"
+script: "polymer test -l firefox"
 env:
   - CXX=g++-4.8
 addons:
