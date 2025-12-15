@@ -1,0 +1,94 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="tipadvisor-app">
+	<template>
+		<style>
+			:host {
+				display: block;
+				padding: 20px;
+			}
+			paper-spinner {
+				display: block;
+				margin: 0 auto;
+			}
+
+			a {
+				text-decoration: none;
+				color: #666;
+			}
+
+			a:hover {
+				color: #999;
+			}
+
+			paper-card .card-heading {
+				padding-bottom: 0;
+			}
+
+			paper-card .card-heading h2 {
+				margin: 0;
+				padding: 0;
+			}
+    </style>
+		<iron-ajax
+			auto
+			url="{{ref}}/random.json"
+			handle-as="json"
+			on-response="parse"
+			debounce-duration="300"></iron-ajax>
+
+			<paper-spinner active="{{!isLoaded}}" hidden$="{{isLoaded}}"></paper-spinner>
+			<div hidden$="{{!isLoaded}}">
+				<paper-card>
+					<div class="card-heading card-content">
+						<h2>
+							Life Pro Tip
+							<a href="{{tip.url}}" tabindex="-1" title="courtesy of {{tip.subreddit}}">
+								<paper-icon-button icon="link"></paper-icon-button>
+							</a>
+						</h2>
+					</div>
+				  <div class="card-content">
+						<p>[[stripAcro(tip.title)]]</p>
+						<p>[[tip.selftext]]</p>
+				  </div>
+				</paper-card>
+			</div>
+
+  </template>
+
+	<script>
+		Polymer({
+
+			is: 'tipadvisor-app',
+
+			parse: function (event, request) {
+			this.tip = request.response[0].data.children[0].data;
+				this.isLoaded = true;
+			},
+
+			stripAcro: function (string) {
+				return string.replace(/(LPT):*/g, '').trim();
+			},
+
+			properties: {
+				tip: Object,
+				ref: {
+					type: String,
+					value: '//www.reddit.com/r/ShittyLifeProTips'
+				},
+				isLoaded: {
+					type: Boolean,
+					value: false
+				}
+			},
+
+		});
+	</script>
+</dom-module>
